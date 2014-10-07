@@ -115,7 +115,7 @@ define(["Floors"], function(Floors) {
             cameraPosition.z -= 0.5;}else if(keyMove.moveBackward){ 
             cameraPosition.z += 0.5;}else if(keyMove.jumpDown){ 
             cameraPosition.y -= 1.5;}else if(keyMove.jumpUp){ 
-            cameraPosition.y += 0.5;} 
+            cameraPosition.y += 1.5;} 
             
             
         camera.position.set(cameraPosition.x, cameraPosition.y, cameraPosition.z);        
