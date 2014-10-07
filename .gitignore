@@ -1,0 +1,5 @@
+npm-debug.log
+*.xmi
+.metadata
+node_modules
+
