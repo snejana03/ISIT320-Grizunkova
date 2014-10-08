@@ -11,7 +11,7 @@ define(["Floors"], function(Floors) {
         moveLeft : false,
         moveRight : false,
         jumpUp : false,
-        jumpDown: false
+        
     };
 
     var cameraPosition = {
@@ -47,7 +47,7 @@ define(["Floors"], function(Floors) {
             keyMove.moveRight = true;
             break;
                        
-        case 96: //space
+        case 32: //space
         keyMove.jumpUp = true;
         break;   
         }
@@ -76,10 +76,7 @@ define(["Floors"], function(Floors) {
         case 68: // d
             keyMove.moveRight = false;
             break;
-            
-        case 96: //space
-        keyMove.jumpUp = false;
-        break;
+
         }
     };
     
