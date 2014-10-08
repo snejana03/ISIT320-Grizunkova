@@ -1,0 +1,6 @@
+Name,Value01,Value02,Value03,,
+BlockSize,20,,
+NumberOfBlocks,6,,
+StartPosition,3,3,3
+FloorBitmap,CheckerBoard.jpg,,
+BoxBitmap,crate.jpg,,
