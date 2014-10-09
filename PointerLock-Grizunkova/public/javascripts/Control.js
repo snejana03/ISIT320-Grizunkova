@@ -19,7 +19,7 @@ define([ "Floors" ,"PointerLockControls","PointerLockSetup"], function(Floors, P
 	var cameraPosition = {
 		x : 2,
 		y : 0,
-		z : 2
+		z : 20
 	}
 
 
@@ -54,6 +54,12 @@ define([ "Floors" ,"PointerLockControls","PointerLockSetup"], function(Floors, P
 	    document.body.appendChild(renderer.domElement);
 
 	    window.addEventListener('resize', onWindowResize, false);
+	    
+	    $("#gameData").load("GameData.html");
+	    
+	    $.getJSON("GameData.json", function(json){
+			$("gameJason").html(json[0].Name);
+			});
 	}
 
 
