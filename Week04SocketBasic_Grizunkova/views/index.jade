@@ -1,0 +1,17 @@
+extends layout
+
+block content
+  h1= title
+  
+  p This application receives a message from the server every 1.5 seconds. 
+  p. 
+    If you type something in the input box, 
+    it goes to the server, is transformed and sent back. In
+    particular, the word apple is transformed to orange on the
+    server side.
+
+  h2 Socket Output
+  input(type='text', class='message', placeholder='If you want an apple just say so.', onkeyup='send(this)')
+  script(src="/socket.io/socket.io.js")
+  p.receive Bar
+  p.display Foo

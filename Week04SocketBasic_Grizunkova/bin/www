@@ -1,0 +1,30 @@
+#!/usr/bin/env node
+
+var debug = require('debug')('SocketBasic');
+var http = require('http');
+var app = require('../app');
+
+app.set('port', process.env.PORT || 30025);
+
+var server = http.createServer(app);
+var io = require('socket.io').listen(server);
+
+io.sockets.on('connection', function(socket) {
+    
+    socket.on('messageChange', function(data) {
+        console.log(data);
+        var regex = new RegExp("apple", "gi");
+        socket.emit('receive', data.message.replace(regex, "orange"));
+    });
+    
+    var x = 0;
+    setInterval(function () {
+        console.log("interval");
+        socket.emit('display', x++);
+    }, 1500);
+});
+
+
+server.listen(app.get('port'), function() {
+  debug('Express server listening on port ' + server.address().port);
+});
