@@ -4,11 +4,8 @@ define([ "Floors" ,"PointerLockControls","PointerLockSetup", "Particles", "MazeP
 	var scene = null;
 	var camera = null;
 	var renderer = null;
-    var particles;
-    var shapes;
-    //var controles;
-   // var npcs;
-    var animateNpc=true;
+    //var particles;
+    //var animateNpc;
 	
 	var cube = null;
 	var size=20;
@@ -58,12 +55,12 @@ define([ "Floors" ,"PointerLockControls","PointerLockSetup", "Particles", "MazeP
 	    
 	   
 	    
-	    particles = new Particles();
+	    var particles = new Particles();
 	   // particles.rotateParticlesAroundWorldAxis(); 
 	   particles.initNpc("Npc000.json",scene,camera);
 	   
 	   //var shapes = new Shapes();
-	   //shapes.addStarObject(npcs, scene, camera, wireFrame, x, y);
+	  // shapes.addStarObject(npcs, scene, camera, wireFrame, x, y);
 	  
 	    doPointerLock();
 
@@ -92,8 +89,8 @@ define([ "Floors" ,"PointerLockControls","PointerLockSetup", "Particles", "MazeP
 		scene.add(yawObject);
 
 		// Move camera to the 1, 1 position
-		yawObject.position.x = size; //+eyex;
-		yawObject.position.z = size; //+eyez;
+		yawObject.position.x = size+eyex;
+		yawObject.position.z = size+eyez;
 
 		var ps = new PointerLockSetup(controls);
 	}

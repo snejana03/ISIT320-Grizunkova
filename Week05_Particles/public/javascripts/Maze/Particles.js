@@ -2,15 +2,12 @@ define(['Utilities', 'Shapes'], function(utilities, Shapes) {
 
     'use strict';
     
-    var size = 20;
+    var size =20;
     var npc;
     var npcs=[];
     var particles=[];
-    var that;
     
-    function Particles(){
-    	that = this;
-    }
+    function Particles(){}
  
     
     function showParticles(scene, x, y) {
@@ -65,7 +62,7 @@ define(['Utilities', 'Shapes'], function(utilities, Shapes) {
                         var npcValue = gridData[j][i];
                         if (npcValue !== 0) {
                             console.log("npcValue: ", npcValue);
-                            shapes.addStarObject(npcs, scene, camera, true, j*size, i*size);
+                            shapes.addStarObject(npcs, scene, camera, true, j, i);
                             // addShape(shapeType, scene, camera, j, i, npcValue);
                             showParticles(scene, j * size, i * size);
                         }

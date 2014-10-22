@@ -9,7 +9,7 @@ define([ 'MTLLoader', 'OBJMTLLoader', 'ColladaLoader' ],
 
     
     var npc;
-    var npcs;
+    var npcs=[];
     
     function Shapes() {
 
