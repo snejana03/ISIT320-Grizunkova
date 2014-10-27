@@ -1,0 +1,25 @@
+extends layout
+
+block content
+
+  div#blocker(style='display: -webkit-box;')
+    div#instructions(style='')
+      span(style='font-size:40px') Click to play
+      p (W, A, S, D = Move, SPACE = Jump, MOUSE = Look around)
+      p Isit320_Grizunkova
+      
+  div#message
+    p
+      strong CameraX: 
+      span#cameraX Foo
+    p
+      strong CameraY: 
+      span#cameraY Foo
+    p
+      strong CameraZ: 
+      span#cameraZ Foo
+    p#gameData foo
+    p#gameJson foo
+    
+    div
+        <canvas id="myCanvas" width="200" height="200" style="border:1px solid #000000;"></canvas>
