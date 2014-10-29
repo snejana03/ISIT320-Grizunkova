@@ -1,7 +1,6 @@
 #!/usr/bin/env node
-var debug = require('debug')('Test05');
+var debug = require('debug')('Week06_GameListener_Grizunkova');
 var app = require('../app');
-
 
 app.set('port', process.env.PORT || 30025);
 

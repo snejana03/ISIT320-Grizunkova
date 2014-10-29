@@ -7,7 +7,7 @@ define([ "Utilities","Core", "TinyPubSub" ], function(utilities, Core, TinyPubSu
 	var cubes = [];
 	var eyex = 200;
 	var eyez = 300;
-	var core=new Core();
+	var core;
 	var msize=8.5;
 
 	function MazePath() {}
@@ -68,7 +68,8 @@ define([ "Utilities","Core", "TinyPubSub" ], function(utilities, Core, TinyPubSu
 			type : "GET",
 			dataType : "json",
 			success : function(gridData) {
-				utilities.showDebug('Opening file: ' + fileName);				
+				utilities.showDebug('Opening file: ' + fileName);
+				core=new Core();
 				core.gridMaze=gridData;
 				var c = document.getElementById("myCanvas");
 				var context = c.getContext("2d");
@@ -83,7 +84,7 @@ define([ "Utilities","Core", "TinyPubSub" ], function(utilities, Core, TinyPubSu
 						}
 					}
 				}
-				$.publish('drawMap', 'Please redwad mini map');
+				//$.subscribe('drawMap', core.gridMaze);
 			},
 
 			error : utilities.showError

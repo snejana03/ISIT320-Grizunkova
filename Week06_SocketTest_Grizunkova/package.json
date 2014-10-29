@@ -1,9 +1,9 @@
 {
-  "name": "Test05",
+  "name": "Week06_GameListener_Grizunkova",
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www"
+    "start": "node ./bin/Sockets.js"
   },
   "dependencies": {
     "body-parser": "~1.8.1",

@@ -15,7 +15,7 @@ define([ 'MTLLoader', 'OBJMTLLoader', 'ColladaLoader' ],
 
     }
 
-    Shapes.prototype.addStarObject = function(npcs, scene, camera, wireFrame, x, y, name) {
+    Shapes.prototype.addStarObject = function(npcs, scene, camera, wireFrame, x, y) {
         var loader = new THREE.OBJMTLLoader();
         loader.load('mesh/20facestar.obj', 'mesh/20facestar.mtl', function(
                 object) {
