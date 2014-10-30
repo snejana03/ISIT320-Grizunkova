@@ -15,12 +15,16 @@ define([ "Floors", "PointerLockControls", "PointerLockSetup", "Particles",
 	var eyex = 200;
 	var eyez = 300;
 	var msize = 8.5;
+	var npcX;
+	var npcZ;
+	var me;
+	
 
 	function Control() {
 
 		init();
 		animate();
-		$.subscribe('drawMap', redrawMap);
+		$.subscribe('drawMap', utilities.redrawMap);
 	}
 
 	function init() {
@@ -110,7 +114,7 @@ define([ "Floors", "PointerLockControls", "PointerLockSetup", "Particles",
 		}
 
 
-		$.publish('drawMap', 'Please redwad mini map');
+		$.publish('drawMap', type=me, 'Please redwad mini map');
 
 		drawText(controlObject, position, particles);
 
@@ -123,7 +127,7 @@ define([ "Floors", "PointerLockControls", "PointerLockSetup", "Particles",
 		
 	}
 	
-	var myObject= new Object();
+	/*var myObject= new Object();
 	
 	function redrawMap(){
 		
@@ -133,10 +137,10 @@ define([ "Floors", "PointerLockControls", "PointerLockSetup", "Particles",
 		var c = document.getElementById("myCanvas");
 		var context = c.getContext("2d");
 		context.fillStyle = "#FF0000";
-       /* if(myObject.x != undefined){
+        if(myObject.x != undefined){
         	console.log(myObject.x);
         	context.clearRect(myObject.x, myObject.z, msize, msize);	
-        }*/
+        }
 		
         context.fillStyle = "#FFFF00";
         var nowX = Math.floor(position.x/size)*msize; 
@@ -152,7 +156,7 @@ define([ "Floors", "PointerLockControls", "PointerLockSetup", "Particles",
 		myObject.z = nowZ;
 		
 		
-	}
+	}*/
 
 	function addLights() {
 		var light = new THREE.DirectionalLight(0xffffff, 1.5);
@@ -179,13 +183,13 @@ define([ "Floors", "PointerLockControls", "PointerLockSetup", "Particles",
 	}
 	
 	
-	function drawText(controlObject, position, particles){
+	function drawText(controlObject, position){
 			$('#cameraX').html(Math.floor(position.x)/size);
 			$('#cameraY').html(Math.floor(position.y)/size);
 			$('#cameraZ').html(Math.floor(position.z)/size);
-			$('#particleX').html(particles.partX);
+			$('#particleX').html(particles.npcX);
 			//$('#particleY').html(y/size);
-			$('#particleZ').html(particles.partZ);
+			$('#particleZ').html(particles.npcZ);
 		
 		
 		

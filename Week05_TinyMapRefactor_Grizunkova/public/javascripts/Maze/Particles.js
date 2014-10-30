@@ -14,34 +14,39 @@ define([ 'Utilities', 'Shapes', 'Core', 'TinyPubSub' ],
 			var particleBaseName = "myParticle";
 			var shapes = new Shapes();
 			var myGrid;
-			var partX;
-			var partZ;
+			var npcX;
+			var npcZ;
+			var particle;
+			//var partX;
+			//var partZ;
 
 			function Particles() {
 				that = this;
 			}
 
 			
-			function showParticles(x, y, particleName) {
+			function showParticles(x, z, particleName) {
 				var geometry = new THREE.IcosahedronGeometry(10, 2);
 				var material = new THREE.PointCloudMaterial({
 					color : 0x00AA00,
 					size : 0.2
 				});
 				var particleSystem = new THREE.PointCloud(geometry, material);
-				particleSystem.position.set(x, 10, y);
+				particleSystem.position.set(x, 10, z);
+				npcX=Math.round(x/size);
+				npcZ=Math.round(z/size);
 				particleSystem.name = particleName;
 				core.scene.add(particleSystem);
 				particles.push(particleSystem);
-				//npcs.push(particleSystem);
+				
 			}
 			
-			Particles.prototype.partPosition= function(particleBaseName,x,z){
+			/*Particles.prototype.partPosition= function(particleBaseName,x,z){
 				return partX=x;
 				return partZ=z;
 				
 				
-			}
+			}*/
 
 			function getName(baseName, x, z) {
 				return baseName + x + z;
@@ -105,7 +110,7 @@ define([ 'Utilities', 'Shapes', 'Core', 'TinyPubSub' ],
 							}
 						}
 						myGrid = gridData;						
-						$.publish('drawMap', 'Please redwad mini map');
+						$.publish('drawMap', type=particle, 'Please redwad mini map');
 					},
 
 					error : utilities.showError

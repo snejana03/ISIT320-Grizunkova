@@ -9,6 +9,7 @@ define([ "Utilities","Core", "TinyPubSub" ], function(utilities, Core, TinyPubSu
 	var eyez = 300;
 	var core=new Core();
 	var msize=8.5;
+	var maze;
 
 	function MazePath() {}
 
@@ -83,7 +84,7 @@ define([ "Utilities","Core", "TinyPubSub" ], function(utilities, Core, TinyPubSu
 						}
 					}
 				}
-				$.publish('drawMap', 'Please redwad mini map');
+				$.publish('drawMap', type=maze,'Please redwad mini map');
 			},
 
 			error : utilities.showError
