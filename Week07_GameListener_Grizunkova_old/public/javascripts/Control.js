@@ -1,4 +1,4 @@
-define(["Utilities", "Sockets" ], function(utilities, io) {
+define(["Utilities" ], function(utilities) {
 
 var send;
 
@@ -21,13 +21,13 @@ function animate() {
 	});
 	socketLocal.emit("socket_listener_connect","Listener connected");
 	
-	socket.on('npcLocations', function(data){
+	socketLocal.on('npcLocations', function(data){
 		console.log(data.positionX, data.positionZ)
 		$('#npcx').html(data.positionX);
 		$('#npcz').html(data.positionZ);
 	});
 	
-	socket.on('redrawMap', function(data) {
+	socketLocal.on('redrawMap', function(data) {
 		console.log(data.grid, data.particles);
 		utilities.redrawMap(data.grid,data.particles, npcType, type);
 		/*var c = document.getElementById("myCanvas");

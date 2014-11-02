@@ -39,29 +39,23 @@ define([ require ], function() {
 			var c = document.getElementById("myCanvas");
 			var ctx = c.getContext("2d");
 			var blockSize = 8.5;
-			utilities.iterate(gridData, function(x, z, npcType) {
-				if (type === maze) {
-					if (npcType === 1) {
-						ctx.fillStyle = "#FF0000";
-					} else {
-						ctx.fillStyle = "#FFE4C4";
+			iterate(gridData, function(x, z, npcType) {
+				if (gridData === grid) {
+					if (type === maze) {
+						if (npcType === 1) {
+							ctx.fillStyle = "#FF0000";
+						}
 					}
 				}
-				if (type === particle) {
-
-					ctx.fillStyle = "#800080";
-
-					if (npcType === 0) {
-						ctx.fillStyle = "#FFE4C4";
+				if (gridData === particles) {
+					if (type === particle) {
+						ctx.fillStyle = "#800080";
 					}
-
 				}
 				if (type === me) {
 					ctx.fillStyle = "#00FF00";
 				}
-				ctx
-						.fillRect(x * blockSize, z * blockSize, blockSize,
-								blockSize);
+				ctx.fillRect(x * blockSize, z * blockSize, blockSize,blockSize);
 
 			});
 		},

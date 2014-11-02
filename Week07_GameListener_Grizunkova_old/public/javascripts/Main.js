@@ -2,27 +2,18 @@
  * @author Charlie Calvert
  */
 
-
-
 require.config({
 	baseUrl : '.',
 	paths : {
-		"jquery" : 'javascripts/jquery-2.1.1',
-		'Sockets' : '/socket.io/socket.io',
+		"jquery" : 'javascripts/jquery-2.1.1',		
 		"Control" : 'javascripts/Control',
 		"Utilities" : 'javascripts/Utilities',
 		
-	},
-	
-	shim : {
-		'Sockets' : {
-			exports : 'io'
-		}
 	}
 });
 	
 
-require([ 'jquery', 'Control' ], function(jq,  Control) {
+require([ 'jquery',  'Control' ], function(jq,  Control) {
 
 	'use strict';
 

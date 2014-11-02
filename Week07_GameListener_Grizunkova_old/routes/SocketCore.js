@@ -10,6 +10,8 @@ module.exports = {
         
         io.sockets.on('connection', function(socket) {
             socket.emit('socket_is_connected_game', 'You are connected!');
+
+
             
             socket.on('disconnect', function() {
                 console.log('disconnected event');

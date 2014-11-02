@@ -1,28 +1,8 @@
-define([ require ], function() {	
+define([ require ], function() {
 	'use strict';
-	
-	var blockSize=8.5;
-	var gridData;
-	var maze;
-	var grid;
-	var particles;
-	var type;
-	var npcType;
-	
-	
 	var utilities = {
 		showDebug : function(data) {
 			console.log(data);
-		},
-
-		drawText : function(controlObject, position, partPosition) {
-			/*
-			 * $('#cameraX').html(Math.floor(position.x)/20);
-			 * $('#cameraY').html(Math.floor(position.y)/20);
-			 * $('#cameraZ').html(Math.floor(position.z)/20);
-			 */
-			//$('#npcx').html(partX);
-			//$('#npcz').html(partZ);
 		},
 
 		iterate : function(gridData, callback) {
@@ -35,7 +15,8 @@ define([ require ], function() {
 				}
 			}
 		},
-		redrawMap : function(grid, particles, npcType, type) {
+
+		redrawMap : function(gridData, type) {
 			var c = document.getElementById("myCanvas");
 			var ctx = c.getContext("2d");
 			var blockSize = 8.5;
