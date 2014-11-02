@@ -61,6 +61,10 @@ define([ "Utilities","Core", "TinyPubSub" ], function(utilities, Core, TinyPubSu
 			controls.isOnObject(true);
 		}
 	}
+	
+	MazePath.prototype.getCubes = function() {
+		return cubes;
+	}
 		
 	MazePath.prototype.addCubes = function(fileName, scene, camera, wireFrame) {
 		$.ajax({
@@ -84,7 +88,9 @@ define([ "Utilities","Core", "TinyPubSub" ], function(utilities, Core, TinyPubSu
 						}
 					}
 				}
-				$.publish('drawMap',gridData,{type:"maze"}, 'Please redraw mini map');
+				return gridData;
+				//$.publish('drawMap',gridData,{type:"maze"}, 'Please redraw mini map');
+				$.publish('drawMap',{type:"maze"}, 'Please redraw mini map');
 				
 				
 			},

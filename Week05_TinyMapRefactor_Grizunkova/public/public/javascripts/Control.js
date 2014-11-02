@@ -48,6 +48,7 @@ define([ "Floors", "PointerLockControls", "PointerLockSetup", "Particles",
 		mazepath = new MazePath();
 		mazepath.addCubes("Grid000.json", core.scene, core.camera);
 
+
 		// particles creation
 		particles = new Particles();
 		particles.initNpc("Npc000.json", core.scene, core.camera);
@@ -119,7 +120,8 @@ define([ "Floors", "PointerLockControls", "PointerLockSetup", "Particles",
 
 		mazepath.collisionDetection(position);
 		
-		$.publish('drawMap',{type:"me"},myGridX,myGridZ,'Please redraw mini map');
+		//$.publish('drawMap',gridData, {type:"me"},'Please redraw mini map');
+		$.publish('drawMap', {type:"me"},'Please redraw mini map');
 
 		// Move the camera
 		controls.update();
@@ -188,9 +190,8 @@ define([ "Floors", "PointerLockControls", "PointerLockSetup", "Particles",
 			$('#cameraX').html(Math.floor(position.x)/size);
 			$('#cameraY').html(Math.floor(position.y)/size);
 			$('#cameraZ').html(Math.floor(position.z)/size);
-			$('#particleX').html(particles.npcX);
-			//$('#particleY').html(y/size);
-			$('#particleZ').html(particles.npcZ);
+			$('#particleX').html(particles.getNpcX);
+			$('#particleZ').html(particles.getNpcZ);
 		
 		
 		

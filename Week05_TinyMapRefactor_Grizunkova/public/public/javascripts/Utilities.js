@@ -5,15 +5,6 @@ define([ require ], function() {
 			console.log(data);
 		},
 
-		/*
-		 * drawText: function(controlObject, position, partPosition){
-		 * $('#cameraX').html(Math.floor(position.x)/20);
-		 * $('#cameraY').html(Math.floor(position.y)/20);
-		 * $('#cameraZ').html(Math.floor(position.z)/20);
-		 * $('#particleX').html(partX); //$('#particleY').html(y/size);
-		 * $('#particleZ').html(partZ); },
-		 */
-
 		iterate : function(gridData, callback) {
 			if (gridData) {
 				for (var z = 0; z < gridData.length; z++) {

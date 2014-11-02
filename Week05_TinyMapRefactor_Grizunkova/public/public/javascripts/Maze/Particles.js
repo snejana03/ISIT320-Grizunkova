@@ -17,8 +17,9 @@ define([ 'Utilities', 'Shapes', 'Core', 'TinyPubSub' ],
 			var npcX;
 			var npcZ;
 			var particle;
-			//var partX;
-			//var partZ;
+			var npcValue;
+			var shapeType;
+
 
 			function Particles() {
 				that = this;
@@ -41,12 +42,14 @@ define([ 'Utilities', 'Shapes', 'Core', 'TinyPubSub' ],
 				
 			}
 			
-			/*Particles.prototype.partPosition= function(particleBaseName,x,z){
-				return partX=x;
-				return partZ=z;
-				
-				
-			}*/
+			
+			Particles.prototype.getNpcX = function() {
+				return npcX;				
+			}
+			
+			Particles.prototype.getNpcZ = function() {
+				return npcZ;				
+			}
 
 			function getName(baseName, x, z) {
 				return baseName + x + z;
@@ -89,10 +92,10 @@ define([ 'Utilities', 'Shapes', 'Core', 'TinyPubSub' ],
 						var c = document.getElementById("myCanvas");
 						var context = c.getContext("2d");
 						for (var i = 0; i < gridData.length; i++) {
-							var shapeType = 4;
+							 shapeType = 4;
 							console.log(gridData[i]);
 							for (var j = 0; j < gridData[0].length; j++) {
-								var npcValue = gridData[j][i];
+								 npcValue = gridData[j][i];
 								if (npcValue !== 0) {
 									console.log("npcValue: ", npcValue);
 									shapes.addStarObject(npcs, scene, camera,
@@ -106,7 +109,8 @@ define([ 'Utilities', 'Shapes', 'Core', 'TinyPubSub' ],
 								}
 							}
 						}
-						myGrid = gridData;						
+						myGrid = gridData;
+						//return gridData;
 						$.publish('drawMap',gridData, {type:"particle"},'Please redraw mini map');
 					},
 
