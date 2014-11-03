@@ -22,7 +22,7 @@ define([ 'MTLLoader', 'OBJMTLLoader', 'ColladaLoader', 'Core' ],
                 object) {
             object.position.set(x, 10, y);
             object.name=name;
-            core.Scene().add(object);
+            core.scene.add(object);
             npcs.push(object);
         });
     }
@@ -32,8 +32,8 @@ define([ 'MTLLoader', 'OBJMTLLoader', 'ColladaLoader', 'Core' ],
                 'mesh/Medieval_building.DAE' ];
         var loader = new THREE.ColladaLoader();
         loader.load(meshes[0], function(result) {
-            result.core.Scene().position.set(x, 6, y);
-            core.Scene().add(result.scene);
+            result.scene.position.set(x, 6, y);
+            core.scene.add(result.scene);
         });
     }
 
@@ -44,7 +44,7 @@ define([ 'MTLLoader', 'OBJMTLLoader', 'ColladaLoader', 'Core' ],
                     object.scale.set(0.03, 0.03, 0.03);
                     object.position.set(x, 0, y);
 
-                    core.Scene().add(object);
+                    core.scene.add(object);
                     npcs.push(object);
                 });
     }
@@ -70,7 +70,7 @@ define([ 'MTLLoader', 'OBJMTLLoader', 'ColladaLoader', 'Core' ],
         var mesh1 = new THREE.Mesh(new THREE.PlaneGeometry(
                 canvas1.width, canvas1.height), material1);
         mesh1.position.set(x, 6, y);
-        core.Scene().add(mesh1);
+        core.scene.add(mesh1);
     }
 
     

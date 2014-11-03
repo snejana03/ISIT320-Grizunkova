@@ -16,33 +16,33 @@ define([ require ], function() {
 			}
 		},
 
-		redrawMap : function(  gridData, type) {
-			gridData=type.grid();
+		redrawMap : function(gridData, type) {
 			var c = document.getElementById("myCanvas");
 			var ctx = c.getContext("2d");
 			var blockSize = 8.5;
 			utilities.iterate(gridData, function(x, z, npcType) {
-				if (type ==='maze') {
+				if (type === maze) {
 					if (npcType === 1) {
 						ctx.fillStyle = "#FF0000";
 					} else {
 						ctx.fillStyle = "#FFE4C4";
 					}
 				}
-				if (type === 'particle') {
+				if (type === particle) {
+
+					ctx.fillStyle = "#800080";
+
 					if (npcType === 0) {
 						ctx.fillStyle = "#FFE4C4";
-					} else {
-
-						ctx.fillStyle = "#800080";
 					}
 
 				}
-				
-				if (type === 'me') {
+				if (type === me) {
 					ctx.fillStyle = "#00FF00";
 				}
-				ctx.fillRect(x * blockSize, z * blockSize, blockSize,blockSize);
+				ctx
+						.fillRect(x * blockSize, z * blockSize, blockSize,
+								blockSize);
 
 			});
 		},

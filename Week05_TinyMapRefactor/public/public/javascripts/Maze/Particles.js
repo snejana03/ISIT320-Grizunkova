@@ -11,8 +11,7 @@ define([ 'Utilities', 'Shapes', 'Core', 'TinyPubSub' ],
 			var baseName;
 			var core = new Core();
 			var msize = 8.5;
-			var particleBaseName = "particle";
-			var starBaseName = 'star';
+			var particleBaseName = "myParticle";
 			var shapes = new Shapes();
 			var myGrid;
 			var npcX;
@@ -38,7 +37,7 @@ define([ 'Utilities', 'Shapes', 'Core', 'TinyPubSub' ],
 				npcX=Math.round(x/size);
 				npcZ=Math.round(z/size);
 				particleSystem.name = particleName;
-				core.Scene().add(particleSystem);
+				core.scene.add(particleSystem);
 				particles.push(particleSystem);
 				
 			}
@@ -55,8 +54,6 @@ define([ 'Utilities', 'Shapes', 'Core', 'TinyPubSub' ],
 			function getName(baseName, x, z) {
 				return baseName + x + z;
 			}
-			
-			
 			
 			Particles.prototype.rotateParticlesAroundWorldAxis = function(
 					npcIndex, axis, radians, npc) {
@@ -101,8 +98,8 @@ define([ 'Utilities', 'Shapes', 'Core', 'TinyPubSub' ],
 								 npcValue = gridData[j][i];
 								if (npcValue !== 0) {
 									console.log("npcValue: ", npcValue);
-									shapes.addStarObject(npcs, core.Scene(), core.Camera(),
-											true, j * size, i * size, getName(starBaseName, j, i));
+									shapes.addStarObject(npcs, scene, camera,
+											true, j * size, i * size, getName(particleBaseName, j, i));
 							
 									showParticles(j * size, i * size, getName(particleBaseName, j, i));
 	      							context.fillStyle = "#800080";
@@ -114,8 +111,7 @@ define([ 'Utilities', 'Shapes', 'Core', 'TinyPubSub' ],
 						}
 						myGrid = gridData;
 						//return gridData;
-						//$.publish('drawMap',gridData, {type:"particle"},'Please redraw mini map');
-						//$.publish('drawMap', { type: 'particle', grid: core.GridNPCs});
+						$.publish('drawMap',gridData, {type:"particle"},'Please redraw mini map');
 					},
 
 					error : utilities.showError
@@ -131,13 +127,8 @@ define([ 'Utilities', 'Shapes', 'Core', 'TinyPubSub' ],
 				Particles.prototype.NPCs = function(x, z, value) {
 					if (myGrid[x][z] !== 0 && value === 0) {
 						var objectName = getName(particleBaseName, x, z);
-						var starName = getName(starBaseName, x, z);						
-						var selectedObject = core.Scene().getObjectByName(objectName);
-						var selectedStar = core.Scene().getObjectByName(starName);
-						core.Scene().remove(selectedObject);	
-						core.Scene().remove(selectedStar);
-						$.publish('drawMap', { type: 'particle', grid: core.GridNPCs});
-						
+						var selectedObject = core.scene.getObjectByName(objectName);
+						core.scene.remove(selectedObject);
 					}
 
 					myGrid[x][z] = value;

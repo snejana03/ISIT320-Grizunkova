@@ -4,13 +4,12 @@
  * @author Charlie Calvert
  */
 
-define([ 'MTLLoader', 'OBJMTLLoader', 'ColladaLoader', 'Core' ], 
-        function(MTLLoader, OBJMTLLoader, ColladaLoader, Core) {
+define([ 'MTLLoader', 'OBJMTLLoader', 'ColladaLoader' ], 
+        function(MTLLoader, OBJMTLLoader, ColladaLoader) {
 
     
     var npc;
     var npcs;
-    var core=new Core();
     
     function Shapes() {
 
@@ -21,8 +20,7 @@ define([ 'MTLLoader', 'OBJMTLLoader', 'ColladaLoader', 'Core' ],
         loader.load('mesh/20facestar.obj', 'mesh/20facestar.mtl', function(
                 object) {
             object.position.set(x, 10, y);
-            object.name=name;
-            core.Scene().add(object);
+            scene.add(object);
             npcs.push(object);
         });
     }
@@ -32,8 +30,8 @@ define([ 'MTLLoader', 'OBJMTLLoader', 'ColladaLoader', 'Core' ],
                 'mesh/Medieval_building.DAE' ];
         var loader = new THREE.ColladaLoader();
         loader.load(meshes[0], function(result) {
-            result.core.Scene().position.set(x, 6, y);
-            core.Scene().add(result.scene);
+            result.scene.position.set(x, 6, y);
+            scene.add(result.scene);
         });
     }
 
@@ -44,7 +42,7 @@ define([ 'MTLLoader', 'OBJMTLLoader', 'ColladaLoader', 'Core' ],
                     object.scale.set(0.03, 0.03, 0.03);
                     object.position.set(x, 0, y);
 
-                    core.Scene().add(object);
+                    scene.add(object);
                     npcs.push(object);
                 });
     }
@@ -70,7 +68,7 @@ define([ 'MTLLoader', 'OBJMTLLoader', 'ColladaLoader', 'Core' ],
         var mesh1 = new THREE.Mesh(new THREE.PlaneGeometry(
                 canvas1.width, canvas1.height), material1);
         mesh1.position.set(x, 6, y);
-        core.Scene().add(mesh1);
+        scene.add(mesh1);
     }
 
     

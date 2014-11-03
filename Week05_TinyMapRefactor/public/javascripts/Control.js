@@ -14,13 +14,10 @@ define([ "Floors", "PointerLockControls", "PointerLockSetup", "Particles",
 	var cubes = [];
 	var eyex = 200;
 	var eyez = 300;
-	//var msize = 8.5;
+	var msize = 8.5;
 	var npcX;
 	var npcZ;
 	var me;
-	var myGridX;
-	var myGridZ;
-	var blockSize = 8.5;
 	
 
 	function Control() {
@@ -34,46 +31,36 @@ define([ "Floors", "PointerLockControls", "PointerLockSetup", "Particles",
 		
 		core = new Core();
 		
-		/*var screenWidth = window.innerWidth / window.innerHeight;
+		var screenWidth = window.innerWidth / window.innerHeight;
 		core.camera = new THREE.PerspectiveCamera(75, screenWidth, 1, 1000);
 		core.scene = new THREE.Scene();
-		core.scene.fog = new THREE.Fog(0xffffff, 0, 750);*/
+		core.scene.fog = new THREE.Fog(0xffffff, 0, 750);
 
 		addLights();
 
 		// drawing floor
 		var floors = new Floors();
-		floors.drawFloor(core.Scene());
+		floors.drawFloor(core.scene);
 
 		// creating mazepath
 		mazepath = new MazePath();
-		mazepath.addCubes("Grid000.json", core.Scene(), core.Camera());
-
+		mazepath.addCubes("Grid000.json", core.scene, core.camera);
 
 		// particles creation
 		particles = new Particles();
-		particles.initNpc("Npc000.json", core.Scene(), core.Camera());
+		particles.initNpc("Npc000.json", core.scene, core.camera);
 
 		doPointerLock();
-		
-		var c = document.getElementById("myCanvas");
-		var ctx = c.getContext("2d");
-		ctx.fillStyle = "#00FF00";
-		ctx.fillRect(1 * blockSize, 1 * blockSize, blockSize,blockSize);
-		
-		
-		
 
 		raycaster = new THREE.Raycaster(new THREE.Vector3(), new THREE.Vector3(
 				0, -1, 0), 0, 10);
 
-		renderer = new THREE.WebGLRenderer({
+		core.renderer = new THREE.WebGLRenderer({
 			antialias : true
 		});
-		renderer.setClearColor(0xffffff);
-		renderer.setSize(window.innerWidth, window.innerHeight);
-		document.body.appendChild(renderer.domElement);
-		
+		core.renderer.setClearColor(0xffffff);
+		core.renderer.setSize(window.innerWidth, window.innerHeight);
+		document.body.appendChild(core.renderer.domElement);
 
 		window.addEventListener('resize', onWindowResize, false);
 
@@ -82,17 +69,25 @@ define([ "Floors", "PointerLockControls", "PointerLockSetup", "Particles",
 		$.getJSON("GameData.json", function(json) {
 			$("gameJason").html(json[0].Name);
 		});
+
+		// $.pubish('drawMap',type=maze, core.gridMaze);
+		/*
+		 * $.subscribe('drawMap', type = "mazePath", function(gridData) { var c =
+		 * document.getElementById("myCanvas"); var context =
+		 * c.getContext("2d"); for (var i = 0; i < gridData.length; ++i) { for
+		 * (var j = 0; j < gridData[0].length; j++) { context.fillStyle =
+		 * "#FF0000"; context.fillRect(i, j, i + size, j + size) } } })
+		 */
 	}
 
 	function doPointerLock() {
-		controls = new THREE.PointerLockControls(core.Camera());
+		controls = new THREE.PointerLockControls(core.camera);
 		var yawObject = controls.getObject();
-		core.Scene().add(yawObject);
+		core.scene.add(yawObject);
 
 		// Move camera to the 1, 1 position
 		yawObject.position.x = size;
-		yawObject.position.z = size;
-		
+		yawObject.position.z = size; 
 
 		var ps = new PointerLockSetup(controls);
 
@@ -110,39 +105,66 @@ define([ "Floors", "PointerLockControls", "PointerLockSetup", "Particles",
 		var controlObject = controls.getObject();
 		var position = controlObject.position;
 		
-		 myGridX = Math.floor(position.x/size);
-		 myGridZ = Math.floor(position.z/size);		
-		 
+		var myGridX = Math.floor(position.x/size);
+		var myGridZ = Math.floor(position.z/size);
 		
 		if (particles.isNpc(myGridX, myGridZ))
 		{
 			particles.NPCs(myGridX, myGridZ, 0);
-		}		
+		}
+
+
+		$.publish('drawMap', type=me, 'Please redwad mini map');
 
 		drawText(controlObject, position, particles);
 
 		mazepath.collisionDetection(position);
-		
-		//$.publish('drawMap',gridData, {type:"me"},'Please redraw mini map');
-		//$.publish('drawMap', {type:"me"});
-		//$.publish('drawMap', { type: 'me'});
 
 		// Move the camera
 		controls.update();
-		renderer.render(core.Scene(), core.Camera());
+		core.renderer.render(core.scene, core.camera);
 
 		
 	}
 	
-
+	/*var myObject= new Object();
+	
+	function redrawMap(){
+		
+		var controlObject = controls.getObject();
+		var position = controlObject.position;
+		
+		var c = document.getElementById("myCanvas");
+		var context = c.getContext("2d");
+		context.fillStyle = "#FF0000";
+        if(myObject.x != undefined){
+        	console.log(myObject.x);
+        	context.clearRect(myObject.x, myObject.z, msize, msize);	
+        }
+		
+        context.fillStyle = "#FFFF00";
+        var nowX = Math.floor(position.x/size)*msize; 
+        var nowZ = Math.floor(position.z/size)*msize; 
+        
+        if(myObject.x == nowX){
+        	console.log(myObject.x);
+        	context.clearRect(myObject.x, myObject.z, msize, msize);	
+        }
+        
+		context.fillRect(nowX, nowZ, msize, msize);
+		myObject.x = nowX;
+		myObject.z = nowZ;
+		
+		
+	}*/
 
 	function addLights() {
 		var light = new THREE.DirectionalLight(0xffffff, 1.5);
 		light.position.set(1, 1, 1);
-		core.Scene().add(light);
+		core.scene.add(light);
 		light = new THREE.DirectionalLight(0xffffff, 0.75);
 		light.position.set(-1, -0.5, -1);
-		core.Scene().add(light);
+		core.scene.add(light);
 	}
 
 	function addSphere(scene, camera, wireFrame, x, y) {
@@ -165,19 +187,18 @@ define([ "Floors", "PointerLockControls", "PointerLockSetup", "Particles",
 			$('#cameraX').html(Math.floor(position.x)/size);
 			$('#cameraY').html(Math.floor(position.y)/size);
 			$('#cameraZ').html(Math.floor(position.z)/size);
-			//$('#particleX').html(particles.getNpcX);
-			//$('#particleZ').html(particles.getNpcZ);
-			$('#particleX').html(myGridX);
-			$('#particleZ').html(myGridZ);
+			$('#particleX').html(particles.npcX);
+			//$('#particleY').html(y/size);
+			$('#particleZ').html(particles.npcZ);
 		
 		
 		
 	}
 
 	function onWindowResize() {
-		core.Camera().aspect = window.innerWidth / window.innerHeight;
-		core.Camera().updateProjectionMatrix();
-		renderer.setSize(window.innerWidth, window.innerHeight);
+		core.camera.aspect = window.innerWidth / window.innerHeight;
+		core.camera.updateProjectionMatrix();
+		core.renderer.setSize(window.innerWidth, window.innerHeight);
 	}
 	return Control;
 });

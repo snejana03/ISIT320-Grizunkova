@@ -14,7 +14,7 @@ define([ "Utilities","Core", "TinyPubSub" ], function(utilities, Core, TinyPubSu
 	function MazePath() {}
 
 	function addCube(scene, camera, wireFrame, x, z) {
-       // core= new Core();
+        core= new Core();
 		var geometry = new THREE.BoxGeometry(size, size, size);
 
 		var material = new THREE.MeshLambertMaterial({
@@ -22,7 +22,7 @@ define([ "Utilities","Core", "TinyPubSub" ], function(utilities, Core, TinyPubSu
 		});
 		var cube = new THREE.Mesh(geometry, material);
 		cube.position.set(x, 10, z);
-		core.Scene().add(cube);
+		core.scene.add(cube);
 		cubes.push(cube);
 		return cube;
 	}
@@ -61,10 +61,6 @@ define([ "Utilities","Core", "TinyPubSub" ], function(utilities, Core, TinyPubSu
 			controls.isOnObject(true);
 		}
 	}
-	
-	MazePath.prototype.getCubes = function() {
-		return cubes;
-	}
 		
 	MazePath.prototype.addCubes = function(fileName, scene, camera, wireFrame) {
 		$.ajax({
@@ -82,16 +78,13 @@ define([ "Utilities","Core", "TinyPubSub" ], function(utilities, Core, TinyPubSu
 					for (var j = 0; j < gridData[0].length; j++) {
 						if (gridData[j][i] === 1) {
 							console.log(gridData[j][i]);
-							addCube(core.Scene(), core.Camera(), wireFrame,i * size, j* size);
+							addCube(scene, camera, wireFrame,i * size, j* size);
 							context.fillStyle = "#FF0000";
 							context.fillRect(i*msize, j*msize, msize, msize)
 						}
 					}
 				}
-				return gridData;
-				$.publish('drawMap', { type: 'maze', grid: core.GridMaze});
-				
-				
+				$.publish('drawMap', type=maze,'Please redwad mini map');
 			},
 
 			error : utilities.showError

@@ -1,14 +1,10 @@
-define([ "Core"], function(Core) {
+define([require], function() {
 
     'use strict';
 
     function Floors() {}
-    
-	
-    var core=new Core();
 
     function makeFloor() {
-
         // floor
 
         geometry = new THREE.PlaneGeometry(2000, 2000, 100, 100);
@@ -57,7 +53,7 @@ define([ "Core"], function(Core) {
         var floor = new THREE.Mesh(floorGeometry, floorMaterial);
         floor.position.y = -0.5;
         floor.rotation.x = Math.PI / 2;
-        core.Scene().add(floor);
+        scene.add(floor);
     };
 
     return Floors;
